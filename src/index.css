@@ -1,0 +1,370 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --red-10: #D94647;
+  --blue-10: #33469A;
+  --blue-20: #E2E6F8;
+  --gray-10: #343434;
+  --gray-20: #B5B5B5;
+  --gray-30: #3B3B3B;
+  --black-10: #171717;
+  font-family: "Cera Pro", "Cera Pro Medium", "Cera Pro Regular Italic", "Cera Pro Bold", "Cera Pro Black", sans-serif;
+}
+
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('./shared/assets/fonts/Cera/Cera_Pro_Light.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cera Pro Medium';
+  src: url('./shared/assets/fonts/Cera/Cera_Pro_Medium.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cera Pro Regular Italic';
+  src: url('./shared/assets/fonts/Cera/Cera_Pro_Regular_Italic.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cera Pro Bold';
+  src: url('./shared/assets/fonts/Cera/Cera_Pro_Bold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cera Pro Black';
+  src: url('./shared/assets/fonts/Cera/Cera_Pro_Black.otf') format('truetype');
+}
+
+body {
+  margin: 0;
+  font-family: "Cera Pro", "Cera Pro Medium", "Cera Pro Regular Italic", "Cera Pro Bold", "Cera Pro Black",sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.app-shadow {
+  box-shadow: 0px 3px 6px 0px #00000029;
+  -webkit-box-shadow: 0px 3px 6px 0px #00000029;
+  -moz-box-shadow: 0px 3px 6px 0px #00000029;
+}
+
+.ant-layout-header {
+  height: auto !important;
+  line-height: 1 !important;
+  padding: 0px !important;
+}
+
+.ant-layout-footer {
+  padding: 0px !important;
+}
+
+.ant-select-focused .ant-select-selector,
+.ant-select-selector:focus,
+.ant-select-selector:active,
+.ant-select-open .ant-select-selector {
+  box-shadow: none !important;
+}
+
+.ant-select-focused .ant-select-selector,
+.ant-select-selector:focus,
+.ant-select-selector:active,
+.ant-select-open .ant-select-selector {
+  border-color: none !important;
+  box-shadow: none !important;
+}
+
+.ant-modal-close {
+  color: #FFF !important;
+}
+
+.btn-primary {
+  background-color: var(--blue-10) !important;
+  color: #fff !important;
+  border-radius: 5px !important;
+}
+
+.btn-secondary {
+  background-color: var(--red-10) !important;
+  border-radius: 0px !important;
+}
+
+.btn-default {
+  background-color:#FFF!important;
+  border-radius: 5px !important;
+}
+
+.font-bold {
+  font-family: "Cera Pro Bold";
+}
+
+.font-medium {
+  font-family: "Cera Pro Medium";
+}
+
+.italic {
+  font-family: "Cera Pro Regular Italic";
+}
+
+.text-blue-10 {
+  color: var(--blue-10);
+}
+
+.text-blue-20 {
+  color: var(--blue-20);
+}
+
+.text-red-10 {
+  color: var(--red-10);
+}
+
+.text-gray-10 {
+  color: var(--gray-10);
+}
+
+.text-gray-20 {
+  color: var(--gray-20);
+}
+
+.text-gray-30 {
+  color: var(--gray-30);
+}
+
+.text-black-10 {
+  color: var(--black-10);
+}
+
+.bg-blue-10 {
+  background-color: var(--blue-10);
+}
+
+.bg-blue-20 {
+  background-color: var(--blue-20);
+}
+
+.bg-red-10 {
+  background-color: var(--red-10);
+}
+
+.bg-gray-10 {
+  background-color: var(--gray-10);
+}
+
+.bg-black-10 {
+  background-color: var(--black-10);
+}
+
+.bg-opac { background-color: rgba(0, 0, 0, 0.4);}
+
+.bg-home-header {
+  background: url("./shared/assets/images/banner/landing.png");
+}
+
+.bg-main-about {
+  background: url("./shared/assets/images/bg/about.jpg");
+}
+
+.bg-course-landing {
+ background: url("./shared/assets/images/banner/courses.jpg");
+}
+
+.bg-course-show {
+  background: url("./shared/assets/images/banner/course.png");
+ }
+
+ .bg-faqs-landing {
+  background: url("./shared/assets/images/banner/faqs.jpg");
+ }
+
+ .bg-contact-landing {
+  background: url("./shared/assets/images/banner/contact.jpg");
+ }
+
+ .bg-sign-in {
+  background: url("./shared/assets/images/bg/signin.jpg");
+ }
+
+ .bg-sign-up {
+  background: url("./shared/assets/images/bg/signup.jpg");
+ }
+
+.h-inherit {
+  height: inherit;
+}
+
+.slick-slider.slick-initialized {
+  display: flex !important;
+  position: relative;
+}
+.slick-arrow.slick-prev {
+  background-color: transparent !important;
+  position: absolute;
+  bottom: 0;
+  margin-left: 6em !important;
+  margin-top: 12em;
+  z-index: 20;
+}
+
+.slick-arrow.slick-next {
+  background-color: transparent !important;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: 10em !important;
+  margin-top: 12em;
+  z-index: 20;
+}
+
+.slick-prev::before, 
+.slick-next::before {
+  content: "";
+}
+
+.slick-prev, 
+.slick-arrow.slick-prev:hover, 
+.slick-arrow.slick-prev:active {
+  background: url("./shared/assets/icons/arrowLeft.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.slick-next, 
+.slick-arrow.slick-next:hover, 
+.slick-arrow.slick-next:active  {
+  background: url("./shared/assets/icons/arrowRight.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 768px) {
+  .slick-arrow.slick-prev {
+    margin-left: 2.7em !important;
+    margin-top: 10em;
+  }
+  
+  .slick-arrow.slick-next {
+    margin-left: 5em !important;
+    margin-top: 10em;
+  }
+}
+
+.main-divider {
+  border-bottom: 2px solid #FFF !important;
+}
+
+.main-divider-gray{
+  border-bottom: 2px solid var(--gray-20) !important;
+}
+.text-control-1 {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.text-control-2 {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-control-3 {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.btn {
+  font-size: 1.1em;
+  border-radius: 1rem;
+  border: 0;
+  letter-spacing: 1px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+.btn-rounded-right {
+  font-size: 1.1em;
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  border: 0;
+  letter-spacing: 1px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+.btn-secondary {
+  background: var(--red-10);
+  color: #ffffff;
+}
+.btn-primary {
+  background: var(--blue-10);
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  border-color: none;
+  background: var(--red-10) !important;
+  outline: 0;
+}
+
+a.btn-secondary {
+  color: #fff !important;
+}
+
+a.btn-primary {
+  color: #fff !important;
+}
+
+.box {
+  border: 1px solid #333333;
+  width: 200px;
+  height: 100px;
+  overflow-x: scroll;
+}
+
+.bg-control {
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  height: 100% !important;
+}
+
+.nav-item {
+  letter-spacing: 2px;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-item a:hover {
+  color: var(--red-10);
+}
+
+.nav-item-active {
+  border: 3px solid var(--red-10);
+  background-color: var(--red-10);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.ant-skeleton-element .ant-skeleton-image {
+  height: 20rem !important;
+  width: 20rem !important;
+}
