@@ -27,7 +27,6 @@ export default class Template extends Component {
     return (
       <View style={styles.main_container}>
         <Text>This is a template</Text>
-          
       </View>
     );
   }
