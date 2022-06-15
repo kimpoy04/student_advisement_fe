@@ -421,7 +421,7 @@ export default class AdminViewStudent extends Component {
               >
                 <View style={{ width: 200, borderWidth: 1, padding: 5 }}>
                   <Wrap>
-                    <Text>Comtemporary World</Text>
+                    <Text>{item.subject.name}</Text>
                   </Wrap>
                 </View>
                 <View style={styles.cell_border}>

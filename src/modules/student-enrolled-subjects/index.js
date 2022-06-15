@@ -290,7 +290,7 @@ export default class StudentEnrolledSubjects extends Component {
             <View style={{ marginLeft: 50, flexDirection: "row", height: 50 }}>
               <View style={{ width: 200, borderWidth: 1, padding: 5 }}>
                 <Wrap>
-                  <Text>Comtemporary World</Text>
+                  <Text>{item.subject.name}</Text>
                 </Wrap>
               </View>
               <View style={styles.cell_border}>
