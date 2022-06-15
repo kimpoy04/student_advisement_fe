@@ -15,6 +15,7 @@ export default class Item extends Component {
     if (this.props.style) {
       propStyles = this.props.style;
     }
+    const { disabled } = this.props;
 
     return (
       <CSSTransition in={this.state.animate} timeout={200} classNames="button">
@@ -39,6 +40,7 @@ export default class Item extends Component {
             display: "inline-flex",
             userSelect: "none",
             flexDirection: "column",
+            pointerEvents: disabled ? "none" : "all",
             ...propStyles,
           }}
           onClick={() => {

@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import "./css.css";
-function uniqid(prefix = "", random = false) {
-  const sec = Date.now() * 1000 + Math.random() * 1000;
-  const id = sec.toString(16).replace(/\./g, "").padEnd(14, "0");
-  return `${prefix}${id}${
-    random ? `.${Math.trunc(Math.random() * 100000000)}` : ""
-  }`;
-}
+
+import Helper from "../helper";
+
 export default class Item extends Component {
   constructor(props = { style: {}, horizontal: false }) {
     super(props);
   }
-  id = uniqid("scroll");
+  id = Helper.uniqid("scroll");
 
   componentDidMount = () => {
     if (this.props.getId) {
@@ -21,15 +17,27 @@ export default class Item extends Component {
     }
   };
 
+  onScroll = (e) => {
+    if (this.props.onScroll) {
+      this.props.onScroll(e.target.scrollTop); //return the scroll
+    }
+  };
+
   render() {
     let propStyles = {};
     if (this.props.style) {
       propStyles = this.props.style;
     }
 
+    let id = this.id;
+    if (this.props.id) {
+      id = this.props.id;
+    }
+
     return (
       <div
-        id={this.id}
+        onScroll={this.onScroll}
+        id={id}
         style={{
           height: "100%",
           width: "100%",

@@ -1,107 +1,197 @@
+import axios from "axios";
+import mem from "../Memory/js";
 
 class Request {
-  hosting = "http://internal.malabon.highlysucceed.com/";
-  
-  request(method = "GET", url = "", parameters = {}, headers = {}, data) {
-    return new Promise(async (resolve, reject) => {
-      var xhttp = new XMLHttpRequest();
-      let new_query_string = "";
-      let index = 0;
-      let parameter_array = [];
+  protocol = "http://";
+  path = "student-advisement.backend.ksmiguel.com";
+  hosting = this.protocol + this.path;
 
-      let param_keys = Object.keys(parameters);
-      param_keys.map((param_key) => {
-        index++;
-        let param_value = parameters[param_key];
-        parameter_array.push(param_key + "=" + param_value);
-        if (index == param_keys.length) {
-          new_query_string = parameter_array.join("&");
-        }
-      });
-      let string = "";
-      xhttp.onreadystatechange = async function () {
-        string += this.readyState + "  " + this.status + "  " + this.responseText + "\n\n";
-        if (this.readyState == 4 && this.status < 400) {
-          let response_text = this.responseText;
-          try {
-            let parsed = JSON.parse(response_text);
-            parsed.success = true;
-            resolve(parsed);
-          } catch (e) {
-            resolve(response_text);
+  async request(
+    props = {
+      method: "",
+      url: "",
+      params: {},
+      onSuccess: () => {},
+      onFail: () => {},
+      onFinish: () => {},
+      isMultiPart: false,
+    }
+  ) {
+    let token = mem.get("jwt_token");
+    const req = axios.create({
+      baseURL: this.hosting + props.url,
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (props.isMultiPart) {
+      req.defaults.headers.common["Content-Type"] = "multipart/form-data";
+    }
+
+    let final_url = "";
+
+    let queryParams = "";
+
+    if (!props.isMultiPart) {
+      if (props.params) {
+        queryParams = await this.encodeParams(props.params);
+      }
+    }
+
+    if (props.url.includes("?")) {
+      final_url = "&" + queryParams;
+    } else {
+      final_url = "?" + queryParams;
+    }
+
+    let params = props.params;
+
+    if (props.isMultiPart) {
+      if (props.params) {
+        params = new FormData();
+        Object.keys(props.params).map((key) => {
+          params.append(key, props.params[key]);
+        });
+      }
+    }
+
+    const response = await req[props.method.toLowerCase()](
+      final_url,
+      params
+    ).catch((err) => {
+      if (err) {
+        if (props.onFail) {
+          if (err.response) {
+            console.log(err.response.data.error);
+            props.onFail(err.response.data.error);
           }
-        } else if (this.readyState == 4 && this.status >= 400) {
-          let response_text = this.responseText;
-          try {
-            let parsed = JSON.parse(response_text);
-            parsed.success = false;
-            resolve(parsed);
-          } catch (e) {
-            resolve(response_text);
-          }
         }
-      };
-
-      let new_url = this.hosting + url;
-      if (method == "GET") {
-        new_url = this.hosting + url + "?" + new_query_string;
       }
-
-
-      xhttp.open(method, new_url, true);
-
-      if (method == "POST") {
-        if (!data) {
-          xhttp.setRequestHeader(
-            "Content-type",
-            "application/x-www-form-urlencoded"
-          );
-        }
-        if (data && Object.keys(parameters).length > 0) {
-          xhttp.setRequestHeader(
-            "Content-type",
-            "multipart/form-data"
-          );
-        }
-        xhttp.setRequestHeader(
-          "Accept",
-          "application/json"
-        );
-      }
-      if (method == "PUT") {
-        xhttp.setRequestHeader(
-          "Content-type",
-          "application/x-www-form-urlencoded"
-        );
-        xhttp.setRequestHeader(
-          "Accept",
-          "application/json"
-        );
-      }
-      let header_keys = Object.keys(headers);
-      header_keys.map((header_key) => {
-        let header_value = headers[header_key];
-        xhttp.setRequestHeader(header_key, header_value);
-      });
-
-      if (data) {
-        let keys = Object.keys(parameters);
-        if (keys.length > 0) {
-          keys.map(item => {
-            data.append(item, parameters[item])
-          });
-        }
-        xhttp.send(data);
-      } else {
-        xhttp.send(new_query_string);
+      if (props.onFinish) {
+        props.onFinish();
       }
     });
+    if (response) {
+      if (props.onSuccess) {
+        // console.log(response.data);
+        props.onSuccess(response.data);
+      }
+      setTimeout(() => {
+        if (props.onFinish) {
+          props.onFinish();
+        }
+      }, 300);
+    }
   }
 
+  async request_with_token(
+    props = {
+      method: "",
+      url: "",
+      params: {},
+      onSuccess: () => {},
+      onFail: () => {},
+      onFinish: () => {},
+      isMultiPart: false,
+      token: ""
+    }
+  ) {
+    // let token = mem.get("jwt_token");
+    const req = axios.create({
+      baseURL: this.hosting + props.url,
+      headers: {
+        Authorization: "Bearer " + props.token,
+      },
+    });
+
+    if (props.isMultiPart) {
+      req.defaults.headers.common["Content-Type"] = "multipart/form-data";
+    }
+
+    let final_url = "";
+
+    let queryParams = "";
+
+    if (!props.isMultiPart) {
+      if (props.params) {
+        queryParams = await this.encodeParams(props.params);
+      }
+    }
+
+    if (props.url.includes("?")) {
+      final_url = "&" + queryParams;
+    } else {
+      final_url = "?" + queryParams;
+    }
+
+    let params = props.params;
+
+    if (props.isMultiPart) {
+      if (props.params) {
+        params = new FormData();
+        Object.keys(props.params).map((key) => {
+          params.append(key, props.params[key]);
+        });
+      }
+    }
+
+    const response = await req[props.method.toLowerCase()](
+      final_url,
+      params
+    ).catch((err) => {
+      if (err) {
+        if (props.onFail) {
+          if (err.response) {
+            console.log(err.response.data.error);
+            props.onFail(err.response.data.error);
+          }
+        }
+      }
+      if (props.onFinish) {
+        props.onFinish();
+      }
+    });
+    if (response) {
+      if (props.onSuccess) {
+        // console.log(response.data);
+        props.onSuccess(response.data);
+      }
+      setTimeout(() => {
+        if (props.onFinish) {
+          props.onFinish();
+        }
+      }, 300);
+    }
+  }
 
   string = (obj) => {
     return JSON.stringify(obj);
-  }
+  };
+
+  encodeParams = (parameters = {}) => {
+    return new Promise((resolve, reject) => {
+      let new_query_string = "";
+      let index = 0;
+      let parameter_array = [];
+      let param_keys = Object.keys(parameters);
+      if (param_keys.length == 0) {
+        resolve("");
+      }
+      param_keys.map((param_key) => {
+        index++;
+        let param_value = parameters[param_key];
+        if (!param_value) {
+          param_value = "";
+        }
+        parameter_array.push(param_key + "=" + param_value);
+        if (index == param_keys.length) {
+          new_query_string = parameter_array.join("&");
+          resolve(new_query_string);
+        }
+      });
+    });
+  };
 }
 
 const r = new Request();
